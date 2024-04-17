@@ -3,11 +3,12 @@ import { Requester } from '../Requester'
 import { RequestInput } from '../RequestInput'
 
 type LetterNumbersMappingArrayProps = {
-    setAnswer: (value: string) => void
+    setAnswer: (answer: string, id: string) => void;
+    resolvedId: string
 }
 
 
-export const LetterNumbersMappingArray: FC<LetterNumbersMappingArrayProps> = ({ setAnswer }) => {
+export const LetterNumbersMappingArray: FC<LetterNumbersMappingArrayProps> = ({ setAnswer, resolvedId }) => {
     const [inputValue, setInputValue] = useState<string | undefined>()
 
     const [body, setBody] = useState({})
@@ -21,7 +22,14 @@ export const LetterNumbersMappingArray: FC<LetterNumbersMappingArrayProps> = ({ 
 
 
     return (
-        <Requester title="Letter Numbers Mapping Array" description="Transform numbers from a list in letters 1=A, 2=B..." url="letterNumbersMappingArray" setAnswer={setAnswer} body={body} method='POST'
+        <Requester
+            title="letterNumbersMappingArray"
+            description="Transform numbers from a list in letters 1=A, 2=B..."
+            url="letterNumbersMappingArray"
+            setAnswer={setAnswer}
+            body={body}
+            method='POST'
+            resolved={resolvedId === "letterNumbersMappingArray"}
             input={
                 <RequestInput type="text" placeholder="Ex: 1,2,a,5,7" value={inputValue} setValue={setInputValue} />
             } />

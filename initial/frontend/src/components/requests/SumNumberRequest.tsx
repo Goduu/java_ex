@@ -3,10 +3,12 @@ import { Requester } from "../Requester"
 import { RequestInput } from "../RequestInput"
 
 type SumNumberRequestProps = {
-    setAnswer: (value: string) => void
+    setAnswer: (answer: string, id: string) => void;
+    resolvedId: string
+
 }
 
-export const SumNumberRequest: FC<SumNumberRequestProps> = ({ setAnswer }) => {
+export const SumNumberRequest: FC<SumNumberRequestProps> = ({ setAnswer, resolvedId }) => {
     const [number1, setNumber1] = useState<string | undefined>("")
     const [number2, setNumber2] = useState<number | undefined>()
     const [number3, setNumber3] = useState<number | undefined>()
@@ -22,7 +24,14 @@ export const SumNumberRequest: FC<SumNumberRequestProps> = ({ setAnswer }) => {
     }, [number1, number2, number3])
 
     return (
-        <Requester title="Sum Int, Float & Str" description="Parse and sum a int, float and string" url="numberParsing" setAnswer={setAnswer} body={body} method='POST'
+        <Requester
+            title="sumIntFloatStr"
+            description="Parse and sum a int, float and string"
+            url="numberParsing"
+            setAnswer={setAnswer}
+            body={body}
+            method='POST'
+            resolved={resolvedId === "sumIntFloatStr"}
             input={<>
                 <RequestInput type="text" placeholder="str" value={number1} setValue={setNumber1} />
                 <RequestInput type="number" placeholder="float" value={number2} setValue={setNumber2} />
