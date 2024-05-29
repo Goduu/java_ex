@@ -1,5 +1,19 @@
 import React, { FC, ReactNode } from 'react'
 import { HiOutlinePlay } from './Icons';
+import { AnswerObject } from './AnswerObject';
+
+
+type ResponseEntity = {
+    headers: { [key: string]: any };
+    body: string;
+    statusCode: string;
+    statusCodeValue: number;
+}
+
+type ApiResponse = {
+    responseEntity: ResponseEntity;
+    code: string;
+}
 
 export type RequesterProps = {
     title: string;
@@ -9,7 +23,7 @@ export type RequesterProps = {
     body?: string | object
     input?: ReactNode
     resolved?: boolean
-    setAnswer: (answer: string, id: string) => void;
+    setAnswer: (answer: AnswerObject, id: string) => void;
 }
 const defaultURL = "http://localhost:8080/"
 
@@ -28,12 +42,17 @@ export const Requester: FC<RequesterProps> = ({ title, description, url, setAnsw
                 throw new Error('Network response was not ok');
             }
             // Read the body of the response as text
-            return response.text();
+
+            return response.json();
         })
             .then(data => {
                 // Use the data from the response body
                 console.log(data);
-                setAnswer(data, title)
+                const apiResponse: ApiResponse = data
+                setAnswer({
+                    code: apiResponse.code,
+                    answer: apiResponse.responseEntity.body
+                }, title)
             })
             .catch(error => {
                 // Handle errors

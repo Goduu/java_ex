@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react"
 import { Requester } from "../Requester"
 import { RequestInput } from "../RequestInput"
+import { AnswerObject } from "../AnswerObject";
 
 type SumNumberRequestProps = {
-    setAnswer: (answer: string, id: string) => void;
+    setAnswer: (answer: AnswerObject, id: string) => void;
     resolvedId: string
 
 }

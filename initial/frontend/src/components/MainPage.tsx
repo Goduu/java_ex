@@ -6,12 +6,13 @@ import { SumNumberRequest } from './requests/SumNumberRequest'
 import { CompareNumbers } from './requests/CompareNumbers'
 import { LetterNumbersMappingArray } from './requests/LetterNumbersMappingArray'
 import { SortNumbers } from './requests/SortNumbers'
+import { AnswerObject } from './AnswerObject'
 
 export const MainPage = () => {
-    const [answer, setAnswer] = useState("")
+    const [answer, setAnswer] = useState<AnswerObject>({ answer: "", code: "" })
     const [resolvedId, setResolvedId] = useState("")
 
-    const handleSetAnswer = (answer: string, id: string) => {
+    const handleSetAnswer = (answer: AnswerObject, id: string) => {
         setAnswer(answer)
         setResolvedId(id)
     }
