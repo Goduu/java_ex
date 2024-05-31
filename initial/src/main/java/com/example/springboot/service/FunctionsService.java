@@ -14,7 +14,7 @@ public class FunctionsService {
     public ResponseObject<String> numberParsing(NumberParsingDTO payload) {
 
         String numberParsingCode = """
-                    public ResponseEntity<String> numberParsing(NumberParsingDTO payload) = {
+                    public String numberParsing(NumberParsingDTO payload) = {
 
                     Float number1 = Float.parseFloat(payload.getNumber1());
                     Float number2 = payload.getNumber2();
@@ -38,7 +38,7 @@ public class FunctionsService {
     public ResponseObject<String> compareNumbers(CompareNumbersDTO payload) {
 
         String compareNumbers = """
-                public ResponseEntity<String> compareNumbers(@RequestBody CompareNumbersDTO payload) {
+                public String compareNumbers(CompareNumbersDTO payload) {
                     Float number1 = payload.getNumber1();
                     Float number2 = payload.getNumber2();
 
@@ -71,7 +71,7 @@ public class FunctionsService {
     public ResponseObject<String> letterNumbersMappingArray(LetterNumbersMappingArrayDTO payload) {
 
         String letterNumbersMappingArray = """
-                public ResponseEntity<String> letterNumbersMappingArray(@RequestBody LetterNumbersMappingArrayDTO payload) {
+                public String letterNumbersMappingArray(LetterNumbersMappingArrayDTO payload) {
                     return ResponseEntity.ok(payload.changeNumberToLetter());
                 }
                 """;
@@ -97,7 +97,7 @@ public class FunctionsService {
                     quickSort(0, myArray.size() - 1);
                 }
 
-                public ResponseEntity<List<Float>> sortNumbers(@RequestBody SortNumbersDTO payload) {
+                public List<Float> sortNumbers(SortNumbersDTO payload) {
                     payload.sortNumbers();
                     return ResponseEntity.ok(payload.getMyArray());
                 }
@@ -122,7 +122,7 @@ public class FunctionsService {
 
     public ResponseObject<Float> postObject(float number1, float number2) {
         String postObjectCode = """
-                public Float postObject(float number1, @PathVariable("number2") float number2) {
+                public Float postObject(float number1, float number2) {
                     return number1 * number2;
                 }
                 """;
