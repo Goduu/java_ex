@@ -1,6 +1,7 @@
-import React, { FC, ReactNode } from 'react'
-import { HiOutlinePlay } from './Icons';
+"use client"
+import React, { FC, ReactNode, useState } from 'react'
 import { AnswerObject } from './AnswerObject';
+import { InputPopover } from './InputPopover';
 
 
 type ResponseEntity = {
@@ -28,8 +29,10 @@ export type RequesterProps = {
 const defaultURL = "http://localhost:8080/"
 
 export const Requester: FC<RequesterProps> = ({ title, description, url, setAnswer, method = "GET", body, input, resolved }) => {
+    const [open, setOpen] = useState(false)
 
     const handleClick = async () => {
+
         await fetch(defaultURL + url, {
             method,
             headers: {
@@ -62,20 +65,19 @@ export const Requester: FC<RequesterProps> = ({ title, description, url, setAnsw
 
 
     return (
-        <button
-            className={`group rounded-lg border ${resolved ? "border-x-lime-500" : "border-transparent"} px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 cursor-pointer`}
-            onClick={handleClick}
-        >
-            <h2 className={`mb-3 text-2xl font-semibold truncate`}>
-                {title}
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {description}
-            </p>
-            <div className='py-2 flex gap-1'>
-                {input}
-            </div>
-            <HiOutlinePlay className='w-10 inline-block text-2xl transition-transform group-hover:translate-x-1 motion-reduce:transform-none' />
-        </button>
+        <>
+            <button
+                className={`group rounded-lg border ${resolved ? "border-x-lime-500" : "border-transparent"} px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 cursor-pointer`}
+                onClick={() => setOpen(true)}
+            >
+                <h2 className={`mb-3 text-2xl font-semibold truncate`}>
+                    {title}
+                </h2>
+                <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+                    {description}
+                </p>
+            </button>
+            <InputPopover open={open} description={description} input={input} sendRequest={handleClick} onClose={() => setOpen(false)} />
+        </>
     )
 }
