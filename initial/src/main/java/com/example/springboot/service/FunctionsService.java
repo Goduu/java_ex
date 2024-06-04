@@ -11,6 +11,20 @@ import java.util.List;
 
 public class FunctionsService {
 
+    public ResponseObject<String> helloWorld() {
+
+        String numberParsingCode = """
+                public String helloWorld(NumberParsingDTO payload) = {
+                    return ResponseEntity<String> responseEntity = ResponseEntity.ok("Greetings from Spring Boot!");
+                }
+                """;
+
+        ResponseEntity<String> responseEntity = ResponseEntity.ok("Greetings from Spring Boot!");
+
+        return new ResponseObject<>(responseEntity, numberParsingCode);
+
+    }
+
     public ResponseObject<String> numberParsing(NumberParsingDTO payload) {
 
         String numberParsingCode = """

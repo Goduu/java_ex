@@ -19,8 +19,8 @@ export const SumNumberRequest: FC<SumNumberRequestProps> = ({ setAnswer, resolve
     useEffect(() => {
         setBody({
             number1: number1,
-            number2: parseFloat(number2?.toString() || "0"),
-            number3: parseInt(number3?.toString() || "0")
+            number2: parseFloat(number2?.toString() ?? "0"),
+            number3: parseInt(number3?.toString() ?? "0")
         })
     }, [number1, number2, number3])
 

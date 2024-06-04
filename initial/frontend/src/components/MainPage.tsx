@@ -19,7 +19,7 @@ export const MainPage = () => {
 
 
     return (
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-8 py-15'>
             <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left gap-4">
                 <Requester title="helloWorld" description="Fetch Hello World" url="" setAnswer={handleSetAnswer} resolved={resolvedId === "helloWorld"} />
                 <SumNumberRequest setAnswer={handleSetAnswer} resolvedId={resolvedId} />

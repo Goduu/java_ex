@@ -27,9 +27,8 @@ public class HelloController {
 	FunctionsService functionsService = new FunctionsService();
 
 	@GetMapping("/")
-	public Map<String, String> index() {
-		Map<String, String> map = Map.of("message", "Greetings from Spring Boot!");
-		return map;
+	public ResponseObject<String> index() {
+		return functionsService.helloWorld();
 	}
 
 	@GetMapping("/test")
